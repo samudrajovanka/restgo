@@ -5,6 +5,7 @@ import FavoriteButtonPresenter from '../../utils/favorite-button-presenter';
 import FormReviewInitiator from '../../utils/form-review-initiator';
 import LoadingInitiator from '../../utils/loading-initiator';
 import FavoriteRestaurantIdb from '../../data/favorite-restaurant-idb';
+import ReviewInitiator from '../../utils/review-initiator';
 
 const Detail = {
   async render() {
@@ -41,9 +42,17 @@ const Detail = {
       },
     });
 
+    const reviewsContainer = document.querySelector('#restaurantReviewsContainer');
+
     FormReviewInitiator.init({
       formReviewContainer: document.querySelector('#restaurantReviewForm'),
+      reviewsContainer,
       idRestaurant: restaurant.id,
+    });
+
+    ReviewInitiator.init({
+      reviewsContainer,
+      reviews: restaurant.customerReviews,
     });
   },
 };

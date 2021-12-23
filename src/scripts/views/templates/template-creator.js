@@ -62,18 +62,19 @@ const createRestaurantDetailTemplate = (restaurant) => `
       <div id="restaurantReviewForm" class="restaurant__review__form">
       </div>
 
-      <ul>
-        ${restaurant.customerReviews.map((review) => `<li class="restaurant__reviews__item">
-          <div class="review__data">
-            <p class="review__name">${review.name}</p>
-            <p class="review__date">${review.date}</p>
-          </div>
-          <p class="review__message">${review.review}</p>
-        </li>`).join('')}
+      <ul id="restaurantReviewsContainer">
       </ul>
     </div>
   </div>
 `;
+
+const createReviewItemTemplate = (review) => `<li class="restaurant__reviews__item">
+  <div class="review__data">
+    <p class="review__name">${review.name}</p>
+    <p class="review__date">${review.date}</p>
+  </div>
+  <p class="review__message">${review.review}</p>
+</li>`;
 
 const createFavoriteButtonTemplate = () => `
   <button aria-label="favorite this restaurant" id="favoriteButton" class="favorite">
@@ -98,7 +99,7 @@ const createFormReviewTemplate = () => `
       <textarea type="text" class="form__control form__control--area" id="reviewMessage" placeholder="Your review" name="review"></textarea>
     </div>
 
-    <button type="submit" class="btn btn--primary">Send Review</button>
+    <button type="submit" aria-label="button submit form review" class="btn btn--primary">Send Review</button>
   </form>
 `;
 
@@ -109,6 +110,7 @@ const createLoadingTemplate = () => `
 export {
   createRestaurantItemTemplate,
   createRestaurantDetailTemplate,
+  createReviewItemTemplate,
   createFavoriteButtonTemplate,
   createUnfavoritedButtonTemplate,
   createFormReviewTemplate,

@@ -1,11 +1,21 @@
 import RestaurantDbSource from '../data/restaurant-source';
-import { createFormReviewTemplate } from '../views/templates/template-creator';
+import { createFormReviewTemplate, createReviewItemTemplate } from '../views/templates/template-creator';
 
 const FormReviewInitiator = {
-  async init({ formReviewContainer, idRestaurant }) {
+  async init({ formReviewContainer, reviewsContainer, idRestaurant }) {
     this._formReviewContainer = formReviewContainer;
+    this._reviewsContainer = reviewsContainer;
     await this._render();
     this._idRestaurant = idRestaurant;
+  },
+
+  _addNewReview({ name, message }) {
+    const dateObj = new Date();
+    const month = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+    const date = `${dateObj.getDate()} ${month[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+
+    this._reviewsContainer.innerHTML += createReviewItemTemplate({ name, review: message, date });
   },
 
   async _render() {
@@ -24,6 +34,7 @@ const FormReviewInitiator = {
 
       if (!result.error) {
         alert('Review added');
+        this._addNewReview({ name, message: review });
         formReview.reset();
       } else {
         alert('Added review failed, try again');
