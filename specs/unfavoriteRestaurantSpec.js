@@ -27,7 +27,7 @@ describe('Unfavorite a restaurant', () => {
     expect(document.querySelector('[aria-label="favorite this restaurant"]')).toBeFalsy();
   });
 
-  it('should be able to remove favorited movie from the list', async () => {
+  it('should be able to remove favorited restaurant from the list', async () => {
     await TestFactories.createFavoriteButtonPresenterWithRestaurant({ id: 1 });
 
     document.querySelector('[aria-label="unfavorite this restaurant"]').dispatchEvent(new Event('click'));
